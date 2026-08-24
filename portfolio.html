@@ -33,7 +33,6 @@
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
   body{
     background:var(--void);
     color:var(--ink);
@@ -44,6 +43,12 @@
   }
   @media(pointer:coarse){ body{ cursor:auto; } }
   ::selection{ background:var(--ember); color:var(--void); }
+
+  /* ---------- Lenis smooth scroll (see lenis.min.js below) ---------- */
+  html.lenis, html.lenis body{ height:auto; }
+  .lenis:not(.lenis-autoToggle).lenis-stopped{ overflow:clip; }
+  .lenis [data-lenis-prevent]{ overscroll-behavior:contain; }
+  .lenis.lenis-smooth iframe{ pointer-events:none; }
 
   h1,h2,h3,.serif{ font-family:'Fraunces', serif; font-weight:500; }
   .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; }
@@ -542,10 +547,26 @@
     <div class="lightbox-cap mono" id="lightboxCap"></div>
   </div>
 
+<script src="gsap.min.js"></script>
+<script src="ScrollTrigger.min.js"></script>
+<script src="lenis.min.js"></script>
 <script>
 (() => {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- Lenis smooth scroll — wraps native scroll, so the thread
+     bar, waypoint IntersectionObserver, and #anchor nav links below all
+     keep working unchanged. Auto-disables smoothing under reduced motion.
+     autoRaf is off here because GSAP's ticker drives the frame loop instead
+     (the standard Lenis+GSAP recipe), so ScrollTrigger stays in sync with
+     Lenis's smoothed position rather than the raw native scroll. */
+  const lenis = new Lenis({ autoRaf: false, anchors: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
 
   /* ---------- scroll progress thread — reacts to scroll like it's alive ---------- */
   const bar = document.getElementById('threadProgress');
@@ -591,15 +612,14 @@
   if (reducedMotion) {
     revealEls.forEach(el => el.classList.add('in'));
   } else {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('in'), (i % 6) * 90);
-          io.unobserve(entry.target);
-        }
+    revealEls.forEach((el, i) => {
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 88%',
+        once: true,
+        onEnter: () => setTimeout(() => el.classList.add('in'), (i % 6) * 90),
       });
-    }, { threshold:0.15, rootMargin:'0px 0px -60px 0px' });
-    revealEls.forEach(el => io.observe(el));
+    });
   }
 
   /* ---------- custom cursor ---------- */
@@ -627,14 +647,16 @@
   /* ---------- magnetic links ---------- */
   if (finePointer && !reducedMotion) {
     document.querySelectorAll('.nav-links a, .contact-row a').forEach(el => {
-      el.style.transition = 'transform 0.25s ease';
+      const setX = gsap.quickTo(el, 'x', { duration: 0.25, ease: 'power3.out' });
+      const setY = gsap.quickTo(el, 'y', { duration: 0.25, ease: 'power3.out' });
       el.addEventListener('mousemove', e => {
         const r = el.getBoundingClientRect();
         const relX = e.clientX - r.left - r.width/2;
         const relY = e.clientY - r.top - r.height/2;
-        el.style.transform = `translate(${relX*0.25}px, ${relY*0.4}px)`;
+        setX(relX*0.25);
+        setY(relY*0.4);
       });
-      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      el.addEventListener('mouseleave', () => { setX(0); setY(0); });
     });
   }
 
