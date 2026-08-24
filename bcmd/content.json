@@ -1,0 +1,124 @@
+{
+  "org": {
+    "name": "Bhutan Centre for Media and Democracy",
+    "acronym": "BCMD",
+    "logo": "https://bcmd.bt/wp-content/themes/BcmdTheme/images/logo.png",
+    "vision": "A vibrant democracy where citizens are engaged and proactive",
+    "mission": "To nurture democracy in Bhutan through civic engagement, public discourse and media literacy"
+  },
+  "nav": [
+    { "label": "About Us", "href": "#about" },
+    { "label": "Programme Areas", "href": "#programmes" },
+    { "label": "Newsroom", "href": "https://bcmd.bt/", "external": true },
+    { "label": "Resources", "href": "https://bcmd.bt/", "external": true },
+    { "label": "Announcements", "href": "https://bcmd.bt/", "external": true },
+    { "label": "Events", "href": "https://bcmd.bt/", "external": true },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "hero": {
+    "image": "images/PF.jpg",
+    "imageAlt": "Participants in traditional gho tie strings together during a BCMD Active Citizens engagement activity in Thimphu."
+  },
+  "values": [
+    { "name": "Teamwork", "definition": "Work as a team in a spirit of mutual respect, cooperation, and equality." },
+    { "name": "Integrity", "definition": "Be accountable and transparent, take responsibility for everything we do." },
+    { "name": "Participation", "definition": "Engage in society, share views, stay informed, be of service to others." },
+    { "name": "Innovation", "definition": "Encourage independence and creativity, promote innovative problem-solving." },
+    { "name": "Leadership", "definition": "Take responsibility to lead oneself, develop the capacity to lead others through inspiration, not authority." },
+    { "name": "Personal Development", "definition": "Engage in continuous learning to better serve community and society." }
+  ],
+  "programmes": [
+    {
+      "id": "citizens",
+      "number": "01",
+      "title": "Empowering Accountable, Active & Responsible Citizens",
+      "intro": "Democracy is only as strong as its citizens' participation. The Centre's programme aims to empower citizens, young and old alike, to engage in the democratic process beyond elections … BCMD focuses on inspiring and enabling people to be more participatory and engaged in their communities.",
+      "activities": [
+        "Youth Summit — an annual reflection and self-discovery programme",
+        "Youth Initiative — a year-long programme teaching investigation, policy review, debate, deliberation and dialogue",
+        "Community Building Initiative",
+        "Educating for Citizenship & Media Literacy",
+        "Strengthening Civil Society"
+      ],
+      "audience": "Youth, teachers, local leaders, residents, parliamentarians, political parties, CSOs",
+      "image": "images/IMG_7087.jpg",
+      "imageAlt": "Participants at a BCMD Youth Summit workshop reviewing notes together outdoors.",
+      "imageCredit": "Youth Summit activity photo, bcmd.bt",
+      "link": null
+    },
+    {
+      "id": "knowledge",
+      "number": "02",
+      "title": "Creating Knowledge Resources for Citizens",
+      "intro": "BCMD produces Bhutan-centric resources that amplify Bhutanese views and perspectives in print, multimedia and a variety of media platforms … distributed to educational institutes, libraries, government agencies and parliamentary institutions.",
+      "activities": [
+        "The Druk Journal — a bi-annual publication plus conversations, at drukjournal.bt",
+        "Creative Multimedia Productions — photo essays, films, PSAs, posters, podcasts"
+      ],
+      "audience": "Youth, teachers, local leaders, parliamentarians, political parties, public servants, CSOs",
+      "image": "images/DJ10-Cover.png",
+      "imageAlt": "Cover of The Druk Journal, Volume 5 Issue 2, Autumn 2019 — “Tourism in Bhutan.”",
+      "imageCredit": "The Druk Journal cover, drukjournal.bt",
+      "link": { "label": "The Druk Journal", "href": "https://drukjournal.bt/" }
+    },
+    {
+      "id": "medialab",
+      "number": "03",
+      "title": "Media Lab — Enabling Citizen Voice",
+      "intro": "BCMD's Media Lab is a learning space for youths, amateur photographers, filmmakers, teachers, thought leaders and media professionals to learn creative skills of photography, design and film-making and to exercise their voice positively.",
+      "activities": [
+        "Media Production & Analysis",
+        "Media Course — production and news literacy",
+        "Youth Camps — the base for the Youth Initiative"
+      ],
+      "audience": "Youth, teachers, local leaders, parliamentarians, political parties, CSOs",
+      "image": "images/Basic-Photography.jpg",
+      "imageAlt": "Four young monks seated on stone steps practising with cameras during a Media Lab basic photography course.",
+      "imageCredit": "Basic Photography course, Media Lab, bcmd.bt",
+      "link": { "label": "Media Lab", "href": "http://bhutanmedialab.org" }
+    }
+  ],
+  "initiatives": [
+    {
+      "name": "The Druk Journal",
+      "note": "Bi-annual publication and conversations",
+      "href": "https://drukjournal.bt/",
+      "image": "images/DJ-10-Conversation.jpg",
+      "imageAlt": "Panel conversation event for The Druk Journal, audience seated in a conference room."
+    },
+    {
+      "name": "Youth Initiative",
+      "note": "Year-long civic engagement programme",
+      "href": "https://bcmd.bt/yibhutan/",
+      "image": "images/IMG_7087.jpg",
+      "imageAlt": "Participants at a BCMD Youth Summit workshop reviewing notes together outdoors."
+    },
+    {
+      "name": "Media Lab",
+      "note": "Photography, design & film-making",
+      "href": "http://bhutanmedialab.org",
+      "image": "images/MediaLab.jpg",
+      "imageAlt": "Two young people looking at photographs on a camera screen outdoors."
+    },
+    {
+      "name": "Civil Society Network",
+      "note": "A partner network of Bhutanese CSOs — not a BCMD-run programme",
+      "href": "http://www.civilsocietybhutan.org",
+      "image": null,
+      "imageAlt": null
+    }
+  ],
+  "contact": {
+    "orgLine1": "Bhutan Centre for Media and Democracy",
+    "address": ["First floor, RSPN Building, Lhado Lam,", "Kawajangsa, P.O. Box 1662,", "Thimphu, Bhutan"],
+    "mapHref": "https://goo.gl/maps/urH3G1UqRqF4A5Q6A",
+    "phone": { "label": "+975 2 327903", "href": "tel:+9752327903" },
+    "email": { "label": "bcmd@bcmd.bt", "href": "mailto:bcmd@bcmd.bt" },
+    "social": [
+      { "label": "Facebook", "href": "https://www.facebook.com/bhutancmd/" },
+      { "label": "Instagram", "href": "https://www.instagram.com/bcmd.bt/" },
+      { "label": "Twitter", "href": "https://twitter.com/bhutan_cmd" },
+      { "label": "YouTube", "href": "https://www.youtube.com/channel/UCugD65P7Y2uc7qZ3mwDW66w" }
+    ]
+  }
+}
