@@ -1,0 +1,376 @@
+:root {
+  color-scheme: dark;
+  --bg: #05080a;
+  --panel-bg: rgba(10, 18, 16, 0.72);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --text: #eafbf1;
+  --text-dim: rgba(234, 251, 241, 0.65);
+  --accent: #59ff8f;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.app-root {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.camera-feed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  filter: brightness(0.55) saturate(0.85);
+}
+
+.scene-canvas {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hud-chip {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(10px);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hud-top-left {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  z-index: 5;
+}
+
+.gesture-indicator .gesture-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.gesture-indicator .gesture-dot.active {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.gesture-legend {
+  position: relative;
+}
+
+.legend-body {
+  margin-top: 0.5rem;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  width: 260px;
+  font-size: 0.8rem;
+}
+
+.legend-body h3 {
+  margin: 0.6rem 0 0.35rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+
+.legend-body h3:first-child {
+  margin-top: 0;
+}
+
+.legend-body ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.legend-body li {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.legend-body strong {
+  color: var(--text);
+}
+
+.legend-body span {
+  color: var(--text-dim);
+}
+
+/* Species panel */
+.species-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 5;
+}
+
+.species-panel-toggle {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-right: none;
+  color: var(--text);
+  width: 28px;
+  height: 52px;
+  border-radius: 10px 0 0 10px;
+  font-size: 1rem;
+}
+
+.species-panel-body {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(12px);
+  border-radius: 14px 0 0 14px;
+  padding: 1.1rem 1.1rem 1.3rem;
+  width: 250px;
+  max-height: 82vh;
+  overflow-y: auto;
+}
+
+.species-panel-body h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+}
+
+.species-panel-hint {
+  margin: 0 0 0.9rem;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.species-panel-body ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.species-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.45rem 0.55rem;
+  color: var(--text);
+  text-align: left;
+}
+
+.species-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.species-item.selected {
+  border-color: var(--panel-border);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.species-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--species-color, var(--accent));
+  box-shadow: 0 0 8px var(--species-color, var(--accent));
+  flex-shrink: 0;
+}
+
+.species-name {
+  font-size: 0.86rem;
+}
+
+.species-desc {
+  margin: 0.2rem 0 0.4rem 1.9rem;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+}
+
+/* Camera gate */
+.camera-gate {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 5, 5, 0.72);
+  backdrop-filter: blur(6px);
+  z-index: 20;
+}
+
+.camera-gate-card {
+  max-width: 420px;
+  padding: 2rem;
+  text-align: center;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+}
+
+.camera-gate-card h1 {
+  font-size: 1.3rem;
+  margin: 0 0 0.7rem;
+}
+
+.camera-gate-card p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 1.4rem;
+}
+
+.camera-gate-actions {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+  border-radius: 999px;
+  padding: 0.65rem 1.3rem;
+  font-size: 0.86rem;
+  border: 1px solid transparent;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: #06210f;
+  font-weight: 600;
+}
+
+.secondary-btn {
+  background: transparent;
+  border-color: var(--panel-border);
+  color: var(--text);
+}
+
+/* Bouquet jar */
+.bouquet-wrap {
+  position: absolute;
+  right: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.bouquet-jar {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 0.4rem;
+  transition: transform 0.18s ease;
+}
+
+.bouquet-jar.bump {
+  transform: scale(1.15);
+}
+
+.bouquet-summary {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  width: 220px;
+  font-size: 0.82rem;
+}
+
+.bouquet-summary h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+}
+
+.bouquet-summary ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.bouquet-summary li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-dim);
+}
+
+.bouquet-summary p {
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* Picked flower flying fx */
+.picked-flyer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--flyer-color, #fff) 0%, transparent 70%);
+  box-shadow: 0 0 24px 6px var(--flyer-color, #fff);
+  pointer-events: none;
+  z-index: 15;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bouquet-jar.bump {
+    transform: none;
+  }
+}
